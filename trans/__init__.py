@@ -8,7 +8,6 @@ from pyramid_beaker import session_factory_from_settings
 
 from trans.resources import Root
 from trans.security import getgroup
-from trans.security import logout
 
 def main(global_config, **settings):
     """ This function returns a Pyramid WSGI application.
@@ -26,7 +25,6 @@ def main(global_config, **settings):
                           authentication_policy=AuthTktAuthenticationPolicy(settings.pop('authkey'), callback=getgroup),
                           authorization_policy=ACLAuthorizationPolicy())
     config.add_static_view(name='static', path='trans:static')
-    config.add_view(logout)
 
     config.scan()
 

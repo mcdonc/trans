@@ -22,7 +22,9 @@ class Root(object):
         trans_name = os.path.join(self.location, u'trans_%s.json' % name)
 
         # Security to prevent directory escalation
-        return Trans(trans_name, self) if trans_name.startswith(self.location) and os.path.isfile(trans_name) else KeyError(name)
+        if trans_name.startswith(self.location) and os.path.isfile(trans_name):
+            return Trans(trans_name, self)
+        raise KeyError(name)
 
     def _get_current(self):
         if os.path.isdir(self.location):

@@ -1,9 +1,16 @@
 from pyramid.view import view_config
 from pyramid.httpexceptions import HTTPFound
+from pyramid.httpexceptions import HTTPForbidden
+
+from pyramid.security import remember, forget
 
 from trans.resources import Root
 from trans.resources import Trans
 from trans.resources import Element
+from trans.security import USERS
+from trans.security import calchash
+
+from pprint import pprint
 
 @view_config(context=Root, renderer='index.mak', permission='view')
 def index(context, request):
@@ -46,3 +53,33 @@ def saveelement(context, request):
         'newvalue': context.__parent__.map[context.__name__],
         'success': True
     }
+
+@view_config(context=HTTPForbidden, renderer='login.mak')
+@view_config(context=Root, name='login', renderer='login.mak')
+def viewlogin(context, request):
+    print '----------- VIEWLOGIN'
+    return {'username': ''}
+
+@view_config(context=Root, request_param='login.submitted',
+             request_method='POST', renderer='login.mak')
+def login(context, request):
+    print '------ DOLOGIN'
+    username = request.params['username']
+    password = request.params['password']
+
+    if USERS.has_key(username) and calchash(password, USERS[username][0]) == USERS[username][1]:
+        headers = remember(request, username)
+        print '------------- HEADERS'
+        pprint(headers)
+        print '------------- /HEADERS'
+        return HTTPFound(location='/', headers=headers)
+
+    request.session.flash('Username/password combination not found!')
+
+    return {'username': username}
+
+@view_config(context=Root, name='logout')
+def logout(context, request):
+    print '------------ LOGOUT'
+    headers = forget(request)
+    return HTTPFound(location='/', headers=headers)

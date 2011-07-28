@@ -1,3 +1,4 @@
 PKG-INFO
 *.egg-info
-
+*.pyc
+sessions/

@@ -1,15 +1,14 @@
 import random
 import string
 import hashlib
-from trans.resources import Root
-from pyramid.httpexceptions import HTTPForbidden, HTTPFound
-from pyramid.view import view_config
-from pyramid.security import remember, forget
-from pprint import pprint
 
-USERS = {
-    'user': ['salt', 'pw'],
-}
+## USERS = {
+##     'user': ['salt', 'pw'],
+## }
+
+USERS = {'user':
+         ['test', 'f4a92ed38b74b373e60b16176a8e19ca0220cd21bf73e46e68c74c0ca77a8cba3f6738b264000d894f7eff5ca17f8cdd01c7beb2ccc2ba2553987c01df152729']
+         }
 
 GROUPS = {
     'user': ['group:users'],
@@ -30,32 +29,3 @@ def getgroup(userid, request):
         else: return []
     else: return None
 
-@view_config(context=HTTPForbidden, renderer='login.mak')
-@view_config(context=Root, name='login', renderer='login.mak')
-def viewlogin(context, request):
-    print '----------- VIEWLOGIN'
-    return {'username': ''}
-
-@view_config(context=Root, request_param='login.submitted',
-             request_method='POST', renderer='login.mak')
-def login(context, request):
-    print '------ DOLOGIN'
-    username = request.params['username']
-    password = request.params['password']
-
-    if USERS.has_key(username) and calchash(password, USERS[username][0]) == USERS[username][1]:
-        headers = remember(request, username)
-        print '------------- HEADERS'
-        pprint(headers)
-        print '------------- /HEADERS'
-        return HTTPFound(location='/', headers=headers)
-
-    request.session.flash('Username/password combination not found!')
-
-    return {'username': username}
-
-@view_config(context=Root, route_name='logout')
-def logout(context, request):
-    print '------------ LOGOUT'
-    headers = forget(request)
-    return HTTPFound(location='/', headers=headers)
