@@ -1,0 +1,142 @@
+*
+{
+     padding: 0;
+     margin: 0;
+}
+
+#header,
+#footer
+{
+    margin-top: 10px;
+    padding-left: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    
+    border-color: #aed0ea;
+    border-style: solid none;
+    border-width: 2px;
+    
+    background-color: #deedf7;
+
+    /*filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff', endColorstr='#deedf7');*/
+    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#deedf7));
+    background: -moz-linear-gradient(top,  #fff,  #deedf7);
+    
+    color: #222;
+    /*text-shadow: 2px 2px 2px #fff;*/
+}
+
+#createnew,
+#editavailable,
+#subheader
+{
+    margin-top: 20px;
+}
+
+#createnew p,
+#editavailable p,
+#subheader,
+#breadcrumbs
+{
+    padding-left: 25px;
+    margin-bottom: 20px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    
+    border-color: #aed0ea;
+    border-style: solid none;
+    border-width: 2px;
+    
+    background-color: #deedf7;
+
+    /*filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff', endColorstr='#deedf7');*/
+    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#deedf7));
+    background: -moz-linear-gradient(top,  #fff,  #deedf7);
+    
+    color: #000;
+    text-weight: bold;
+}
+
+#createnew form
+{
+    padding-left: 25px;
+}
+
+#editavailable ul
+{
+    padding-left: 50px;
+    list-style-type: none;
+}
+
+#editavailable li
+{
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+#editavailable a
+{
+    color: #000;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+#content
+{
+    padding-left: 50px;
+    width: 800px;
+}
+
+#content .row
+{
+    clear: both;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+#content .row label
+{
+    width: 300px;
+    display: block;
+    float: left;
+}
+
+#content .row input
+{
+    width: 200px;
+}
+
+#content .row span,
+.flashmessage
+{
+    margin-left: 10px;
+    padding-left: 20px;
+    padding-right: 1.5em;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    
+    border-radius: 1em;
+    
+    color: #fff;
+}
+
+#content .updated,
+.flashmessage
+{
+    background-color: #00c000;
+}
+
+#content .updatefailed,
+#content .error
+{
+    background-color: #cc0000;
+}
+
+#footer a,
+#breadcrumbs a,
+#header a
+{
+    color: #000;
+    text-decoration: none;
+    font-weight: bold;
+}
